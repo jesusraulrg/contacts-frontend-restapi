@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTACTOS | Eliminar Contacto</title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/litera/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/details_delete.css">
+</head>
+<body class="bg-light">
+    <div class="container">
+        <div class="col-md-8 offset-md-2">
+
+            <div class="header">
+                <h1>Eliminar Contacto</h1>
+            </div>
+
+            <div>
+                <p class="lead">Email: <span id="email"></span></p>
+                <p class="lead">Nombre: <span id="nombre"></span></p>
+                <p class="lead">Teléfono: <span id="telefono"></span></p>
+            </div>
+
+            <div class="buttons-container">
+                <button type="button" class="btn btn-outline-dark" onclick="deleteContact()"><h4>Eliminar</h4></button>
+                <button type="button" class="btn btn-outline-dark" onclick="goBack()"><h4>Cancelar</h4></button>
+            </div>
+
+        </div>
+    </div>
+    <script src="../static/js/delete.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTACTOS | RESTAPI</title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/litera/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/index_search.css">
+</head>
+<body class="bg-light">
+    <div class="container">
+        <div class="col-md-8 offset-md-2">
+            <div class="header">
+                <h1 class="text-center">Contactos</h1>
+                <header class="d-flex justify-content-around align-items-center">
+                    <button type="button" class="btn btn-outline-dark"><h4><a href="create">Insertar</a></h4></button>
+                    <button type="button" class="btn btn-outline-dark"><h4><a href="search">Buscar</a></h4></button>
+                </header>
+            </div>
+    
+            <table class="table table-hover" >
+                <thead id="thead_contactos">
+                    <tr class="table-light">
+                        <td>Correo</td>
+                        <td>Nombre</td>
+                        <td>Teléfono</td>
+                        <td>Opciones</td>
+                    </tr>
+                </thead>
+                <tbody id="tbody_contactos"></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="../static/js/index.js"></script>
+    <script>
+        document.body.onload = getContacts();
+    </script>
+</body>
+</html>
