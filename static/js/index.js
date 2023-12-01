@@ -1,6 +1,6 @@
 function getContacts() {
     var request = new XMLHttpRequest();
-    request.open('GET', "http://127.0.0.1:8000/contactos");
+    request.open('GET', "https://contacts-backend-5491847c74b7.herokuapp.com");
     request.send();    
 
     request.onload = (e) => {

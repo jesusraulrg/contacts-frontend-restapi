@@ -7,7 +7,7 @@ function getForEmail() {
     }
 
     var request = new XMLHttpRequest();
-    var url = "http://127.0.0.1:8000/contactos/" + encodeURIComponent(email);
+    var url = "https://contacts-backend-5491847c74b7.herokuapp.com/" + encodeURIComponent(email);
     request.open('GET', url);
     request.send();
 

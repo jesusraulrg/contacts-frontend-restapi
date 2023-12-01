@@ -3,7 +3,7 @@ const email = urlParams.get('email');
 
 function obtenerDetallesDeContacto() {
     var solicitud = new XMLHttpRequest();
-    solicitud.open('GET', "http://127.0.0.1:8000/contactos/" + email);
+    solicitud.open('GET', "https://contacts-backend-5491847c74b7.herokuapp.com/" + email);
     solicitud.send();
 
     solicitud.onload = function() {
@@ -39,7 +39,7 @@ function update() {
 
     if (confirm("¿Desea actualizar el contacto?")) {
         var solicitud = new XMLHttpRequest();
-        solicitud.open('PUT', "http://127.0.0.1:8000/contactos/" + email);
+        solicitud.open('PUT', "https://contacts-backend-5491847c74b7.herokuapp.com/" + email);
         solicitud.setRequestHeader("Content-Type", "application/json");
 
         var datosActualizados = {
