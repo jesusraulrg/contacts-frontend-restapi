@@ -9,7 +9,7 @@ function createContact() {
     }
 
     var request = new XMLHttpRequest();
-    var url = 'https://contacts-backend-5491847c74b7.herokuapp.com';
+    var url = 'https://contacts-backend-5491847c74b7.herokuapp.com/contactos';
 
     request.open('POST', url);
     request.setRequestHeader('Content-Type', 'application/json');
