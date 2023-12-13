@@ -4,14 +4,14 @@ const token = sessionStorage.getItem('token');
 
 function getContactDetails() {
     var requestToken = new XMLHttpRequest(); // Cambiado de 'request' a 'requestToken'
-    requestToken.open('GET', 'http://localhost:8000/login');
+    requestToken.open('GET', 'https://contacts-frontend-be92669e2c94.herokuapp.com/login');
     requestToken.setRequestHeader('Authorization', 'Bearer ' + token);
     requestToken.send();
 
     requestToken.onload = () => {
         if (requestToken.status === 200) {
             var request = new XMLHttpRequest();
-            request.open('GET', "http://localhost:8000/contactos/" + email);
+            request.open('GET', "https://contacts-frontend-be92669e2c94.herokuapp.com/contactos/" + email);
             request.setRequestHeader('Authorization', 'Bearer ' + token);
             request.send();
 

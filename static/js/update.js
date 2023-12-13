@@ -5,7 +5,7 @@ function obtenerDetallesDeContacto() {
     var token = sessionStorage.getItem('token');
 
     var solicitud = new XMLHttpRequest();
-    solicitud.open('GET', "http://localhost:8000/contactos/" + email);
+    solicitud.open('GET', "https://contacts-frontend-be92669e2c94.herokuapp.com/contactos/" + email);
     solicitud.setRequestHeader('Authorization', 'Bearer ' + token);
     solicitud.send();
 
@@ -44,7 +44,7 @@ function update() {
         var token = sessionStorage.getItem('token');
 
         var solicitud = new XMLHttpRequest();
-        solicitud.open('PUT', "http://localhost:8000/contactos/" + email);
+        solicitud.open('PUT', "https://contacts-frontend-be92669e2c94.herokuapp.com/contactos/" + email);
         solicitud.setRequestHeader('Authorization', 'Bearer ' + token);
         solicitud.setRequestHeader("Content-Type", "application/json");
 
