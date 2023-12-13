@@ -1,9 +1,11 @@
 const urlParams = new URLSearchParams(window.location.search);
 const email = urlParams.get('email');
+const token = sessionStorage.getItem('token');
 
 function getContactDetails() {
     var request = new XMLHttpRequest();
-    request.open('GET', "https://contacts-backend-5491847c74b7.herokuapp.com/contactos/" + email);
+    request.open('GET', "http://127.0.0.1:8000/contactos/" + email);
+    request.setRequestHeader('Authorization', 'Bearer ' + token);
     request.send();
 
     request.onload = (e) => {
@@ -24,19 +26,28 @@ function goBack() {
 }
 
 function deleteContact() {
-    if (confirm("¿Deseas eliminar este contacto?")) {
-        var request = new XMLHttpRequest();
-        request.open('DELETE', "https://contacts-backend-5491847c74b7.herokuapp.com/contactos/" + email);
-        request.send();
+    var request = new XMLHttpRequest();
+    request.open('GET', 'http://localhost:8000/login');
+    request.setRequestHeader('Authorization', 'Bearer ' + token);
+    request.send();
 
-        request.onload = (e) => {
-            const response = request.responseText;
-            const json = JSON.parse(response);
-            
-            alert("Contacto eliminado exitosamente");
-            window.history.back();
-            window.location.href = "/";
-            
-        };
-    }
+    request.onload = () => {
+        if (request.status === 200) {
+            if (confirm("¿Deseas eliminar este contacto?")) {
+                var deleteRequest = new XMLHttpRequest();
+                deleteRequest.open('DELETE', "http://127.0.0.1:8000/contactos/" + email);
+                deleteRequest.setRequestHeader('Authorization', 'Bearer ' + token);
+                deleteRequest.send();
+
+                deleteRequest.onload = (e) => {
+                    const deleteResponse = deleteRequest.responseText;
+                    const deleteJson = JSON.parse(deleteResponse);
+
+                    alert("Contacto eliminado exitosamente");
+                    window.history.back();
+                    window.location.href = "/contactos";
+                };
+            }
+        }
+    };
 }

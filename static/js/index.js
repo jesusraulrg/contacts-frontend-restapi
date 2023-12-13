@@ -1,60 +1,84 @@
 function getContacts() {
-    var request = new XMLHttpRequest();
-    request.open('GET', "https://contacts-backend-5491847c74b7.herokuapp.com/contactos");
-    request.send();    
+    var token = sessionStorage.getItem('token');
+    console.log(sessionStorage.getItem('token'));
 
-    request.onload = (e) => {
-        const response = request.responseText;
-        const json = JSON.parse(response);
+    var requestToken = new XMLHttpRequest();
+    requestToken.open('GET', 'http://localhost:8000/login', true);
+    requestToken.setRequestHeader('Authorization', 'Bearer ' + token);
 
-        const tbody_contactos = document.getElementById("tbody_contactos");
-        tbody_contactos.innerHTML = '';
+    requestToken.onload = () => {
+        if (requestToken.status === 200) {
+            const URL = "http://localhost:8000/contactos";
 
-        for (let i = 0; i < json.length; i++) {
-            var tr = document.createElement("tr");
-            var td_email = document.createElement("td");
-            var td_nombre = document.createElement("td");
-            var td_telefono = document.createElement("td");
-            var td_opciones = document.createElement("td");
-        
-            td_email.innerHTML = json[i]["email"];
-            td_nombre.innerHTML = json[i]["nombre"];
-            td_telefono.innerHTML = json[i]["telefono"];
-        
-            var btnVer = document.createElement('button');
-            btnVer.classList = 'btn btn-outline-info';
-            btnVer.textContent = 'Ver';
-            btnVer.addEventListener('click', function () {
-                window.location.href = 'details?email=' + json[i]["email"];
-            });
-        
-            var btnEditar = document.createElement('button');
-            btnEditar.classList = 'btn btn-outline-success';
-            btnEditar.textContent = 'Editar';
-            btnEditar.addEventListener('click', function () {
-                window.location.href = 'update?email=' + json[i]["email"];
-            });
-        
-            var btnEliminar = document.createElement('button');
-            btnEliminar.classList = 'btn btn-outline-danger';
-            btnEliminar.textContent = 'Eliminar';
-            btnEliminar.addEventListener('click', function () {
-                window.location.href = 'delete?email=' + json[i]["email"];
-            });
+            var requestContacts = new XMLHttpRequest();
+            requestContacts.open('GET', URL);
+            requestContacts.setRequestHeader('Authorization', 'Bearer ' + token);
 
-            btnVer.style.marginRight = '8px';
-            btnEditar.style.marginRight = '8px';
-        
-            td_opciones.appendChild(btnVer);
-            td_opciones.appendChild(btnEditar);
-            td_opciones.appendChild(btnEliminar);
-        
-            tr.appendChild(td_email);
-            tr.appendChild(td_nombre);
-            tr.appendChild(td_telefono);
-            tr.appendChild(td_opciones);
+            requestContacts.onload = () => {
+                if (requestContacts.status === 200) {
+                    const responseContacts = JSON.parse(requestContacts.responseText);
+                    console.log("response: ", responseContacts);
 
-             tbody_contactos.appendChild(tr);
+                    displayContacts(responseContacts);
+                } else {
+                    console.error("Error al obtener contactos. Código de estado:", requestContacts.status);
+                }
+            };
+
+            requestContacts.send();
+        } else {
+            console.error("Error al obtener el token. Código de estado:", requestToken.status);
         }
     };
+
+    requestToken.send();
+}
+
+function displayContacts(contacts) {
+    const tbody_contactos = document.getElementById("tbody_contactos");
+    tbody_contactos.innerHTML = '';
+
+    for (let i = 0; i < contacts.length; i++) {
+        var tr = document.createElement("tr");
+        var td_email = document.createElement("td");
+        var td_nombre = document.createElement("td");
+        var td_telefono = document.createElement("td");
+        var td_opciones = document.createElement("td");
+
+        td_email.innerHTML = contacts[i]["email"];
+        td_nombre.innerHTML = contacts[i]["nombre"];
+        td_telefono.innerHTML = contacts[i]["telefono"];
+
+        var btnVer = createButton('Ver', 'btn-outline-info', function () {
+            window.location.href = 'details?email=' + contacts[i]["email"];
+        });
+
+        var btnEditar = createButton('Editar', 'btn-outline-success', function () {
+            window.location.href = 'update?email=' + contacts[i]["email"];
+        });
+
+        var btnEliminar = createButton('Eliminar', 'btn-outline-danger', function () {
+            window.location.href = 'delete?email=' + contacts[i]["email"];
+        });
+
+        td_opciones.appendChild(btnVer);
+        td_opciones.appendChild(btnEditar);
+        td_opciones.appendChild(btnEliminar);
+
+        tr.appendChild(td_email);
+        tr.appendChild(td_nombre);
+        tr.appendChild(td_telefono);
+        tr.appendChild(td_opciones);
+
+        tbody_contactos.appendChild(tr);
+    }
+}
+
+function createButton(text, className, clickHandler) {
+    var button = document.createElement('button');
+    button.classList = 'btn ' + className;
+    button.textContent = text;
+    button.addEventListener('click', clickHandler);
+    button.style.marginRight = '8px';
+    return button;
 }

@@ -2,8 +2,11 @@ const urlParams = new URLSearchParams(window.location.search);
 const email = urlParams.get('email');
 
 function obtenerDetallesDeContacto() {
+    var token = sessionStorage.getItem('token');
+
     var solicitud = new XMLHttpRequest();
-    solicitud.open('GET', "https://contacts-backend-5491847c74b7.herokuapp.com/contactos/" + email);
+    solicitud.open('GET', "http://localhost:8000/contactos/" + email);
+    solicitud.setRequestHeader('Authorization', 'Bearer ' + token);
     solicitud.send();
 
     solicitud.onload = function() {
@@ -38,8 +41,11 @@ function update() {
     }
 
     if (confirm("¿Desea actualizar el contacto?")) {
+        var token = sessionStorage.getItem('token');
+
         var solicitud = new XMLHttpRequest();
-        solicitud.open('PUT', "https://contacts-backend-5491847c74b7.herokuapp.com/contactos/" + email);
+        solicitud.open('PUT', "http://localhost:8000/contactos/" + email);
+        solicitud.setRequestHeader('Authorization', 'Bearer ' + token);
         solicitud.setRequestHeader("Content-Type", "application/json");
 
         var datosActualizados = {
