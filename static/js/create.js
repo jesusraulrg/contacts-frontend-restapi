@@ -12,7 +12,7 @@ function createContact() {
     }
 
     const request = new XMLHttpRequest();
-    const url = 'http://127.0.0.1:8000/contactos';
+    const url = 'https://contacts-backend-5491847c74b7.herokuapp.com/contactos';
 
     request.open('POST', url);
     request.setRequestHeader('Content-Type', 'application/json');

@@ -4,7 +4,7 @@ const token = sessionStorage.getItem('token');
 
 function getContactDetails() {
     var request = new XMLHttpRequest();
-    request.open('GET', "http://127.0.0.1:8000/contactos/" + email);
+    request.open('GET', "https://contacts-backend-5491847c74b7.herokuapp.com/contactos/" + email);
     request.setRequestHeader('Authorization', 'Bearer ' + token);
     request.send();
 
@@ -35,7 +35,7 @@ function deleteContact() {
         if (request.status === 200) {
             if (confirm("¿Deseas eliminar este contacto?")) {
                 var deleteRequest = new XMLHttpRequest();
-                deleteRequest.open('DELETE', "http://127.0.0.1:8000/contactos/" + email);
+                deleteRequest.open('DELETE', "https://contacts-backend-5491847c74b7.herokuapp.com/contactos/" + email);
                 deleteRequest.setRequestHeader('Authorization', 'Bearer ' + token);
                 deleteRequest.send();
 
