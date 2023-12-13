@@ -27,7 +27,7 @@ function goBack() {
 
 function deleteContact() {
     var request = new XMLHttpRequest();
-    request.open('GET', 'https://contacts-frontend-be92669e2c94.herokuapp.com/login');
+    request.open('GET', 'https://contacts-backend-5491847c74b7.herokuapp.com/login');
     request.setRequestHeader('Authorization', 'Bearer ' + token);
     request.send();
 

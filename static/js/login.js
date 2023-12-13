@@ -8,7 +8,7 @@ function loginUser() {
     };
   
     var request = new XMLHttpRequest();
-    request.open('GET', 'https://contacts-frontend-be92669e2c94.herokuapp.com/token/', true);
+    request.open('GET', 'https://contacts-backend-5491847c74b7.herokuapp.com/token/', true);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
   
     var encodedCredentials = btoa(username + ':' + password);

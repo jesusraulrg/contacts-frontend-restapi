@@ -3,12 +3,12 @@ function getContacts() {
     console.log(sessionStorage.getItem('token'));
 
     var requestToken = new XMLHttpRequest();
-    requestToken.open('GET', 'https://contacts-frontend-be92669e2c94.herokuapp.com/login', true);
+    requestToken.open('GET', 'https://contacts-backend-5491847c74b7.herokuapp.com/login', true);
     requestToken.setRequestHeader('Authorization', 'Bearer ' + token);
 
     requestToken.onload = () => {
         if (requestToken.status === 200) {
-            const URL = "https://contacts-frontend-be92669e2c94.herokuapp.com/contactos";
+            const URL = "https://contacts-backend-5491847c74b7.herokuapp.com/contactos";
 
             var requestContacts = new XMLHttpRequest();
             requestContacts.open('GET', URL);
